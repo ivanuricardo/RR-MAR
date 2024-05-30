@@ -1,5 +1,7 @@
+using DrWatson
+@quickactivate "RR-MAR"
 using CodecBzip2
-using TensorToolbox, CommonFeatures, RData, LinearAlgebra, Statistics, PlotlyJS
+using TensorToolbox, CommonFeatures, RData, LinearAlgebra, Statistics
 
 globaldata = load("data/globaldata.rda")
 unpermuted = globaldata["matdata"]
@@ -20,5 +22,5 @@ hqc = icranks.hqc[1:4]
 hqcp = icranks.hqc[end]
 @info "AIC selects ranks $aic with $aicp lags."
 @info "BIC selects ranks $bic with $bicp lags."
-@info "AIC selects ranks $hqc with $hqcp lags."
+@info "HQ selects ranks $hqc with $hqcp lags."
 

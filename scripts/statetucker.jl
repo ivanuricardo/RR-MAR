@@ -1,4 +1,6 @@
-using DataFrames, XLSX, CommonFeatures, Statistics, TensorToolbox, LinearAlgebra, PlotlyJS
+using DrWatson
+@quickactivate "RR-MAR"
+using DataFrames, XLSX, CommonFeatures, Statistics, TensorToolbox, LinearAlgebra
 
 datamatrix = XLSX.readdata("data/reguib_northcentral.xlsx", "Sheet1!A2:S459")
 
@@ -14,9 +16,6 @@ tucketa = 1e-03
 ϵ = 1e-03
 p = 3
 
-# origy, lagy = tlag(tensordata, 1)
-#
-# tuckerest = tuckerreg(tensordata, [2, 9, 1, 9], tucketa, maxiters, 1, ϵ)
 
 icranks = fullinfocrit(tensordata, p, r̄; maxiters, tucketa, ϵ)
 aic = icranks.aic[1:4]
@@ -27,4 +26,4 @@ hqc = icranks.hqc[1:4]
 hqcp = icranks.hqc[end]
 @info "AIC selects ranks $aic with $aicp lags."
 @info "BIC selects ranks $bic with $bicp lags."
-@info "AIC selects ranks $hqc with $hqcp lags."
+@info "HQ selects ranks $hqc with $hqcp lags."
