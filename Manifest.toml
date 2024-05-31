@@ -206,7 +206,7 @@ version = "1.0.2"
 
 [[deps.CommonFeatures]]
 deps = ["Combinatorics", "Distributions", "LinearAlgebra", "ProgressBars", "Random", "ReverseDiff", "Statistics", "TensorToolbox"]
-git-tree-sha1 = "eb37c9a43770c7188389b85132ff7437bbbc0d46"
+git-tree-sha1 = "07eca379e6d130530c30060e2054b70d236d4115"
 repo-rev = "main"
 repo-url = "https://github.com/ivanuricardo/CommonFeatures.jl"
 uuid = "d562da72-20cd-4cfa-9b52-1d2260ac0556"
