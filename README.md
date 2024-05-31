@@ -42,11 +42,20 @@ julia -t 999 simulations/pathtosimulation.jl
 and replace `999` with however many threads you would like to parallelize over.
 Similarly, replace `pathtosimulation.jl` with the desired simulation you would like to run.
 
-For instance, if you would like to run the simulation that uses a $9 \times 2$ matrix valued time series with ranks $(1,1,1,1)$ over 7 threads, simply type
+For instance, if you would like to run the simulation that uses a $9 \times 2$ matrix valued time series with ranks $(1,1,1,1)$ over 7 cores, simply type
 ```bash
 julia -t 7 simulations/ninebytwo/1111.jl
 ```
 and the simulation will start.
 
 ## Empirical Illustration
+
+We have two scripts that reproduce the selection of Tucker ranks for both empirical illustrations and two notebooks reproducing the empirical analysis and tables for the paper.
+
+In order to reproduce the selection of the Tucker ranks, simply type
+
+```bash
+julia -t 999 scripts/statetucker.jl  # For Coincident and leading indicators over U.S. states.
+julia -t 999 scripts/globaltucker.jl  # For macroeconomic indicators over Eurozone/North American countries.
+```
 
