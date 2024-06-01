@@ -33,6 +33,8 @@ which auto-activate the project and enable local path handling from DrWatson.
 
 We include two different scenarios for the simulations in the paper.
 Each of these scenarios contains four different simulations, making a total of eight simulation studies.
+One note is that simulation results may differ slightly because of the random number generation in the simulations.
+For the paper, simulations are done on a computer cluster using 40 threads.
 
 First, make sure you are in the project root directory.
 To run a desired simulation, simply type 
