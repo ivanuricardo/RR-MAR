@@ -59,3 +59,6 @@ julia -t 999 scripts/statetucker.jl  # For Coincident and leading indicators ove
 julia -t 999 scripts/globaltucker.jl  # For macroeconomic indicators over Eurozone/North American countries.
 ```
 
+These are much quicker than the simulations and can be done in less than ten minutes.
+
+The Jupyter notebooks can be run interactively and can be opened in any Jupyter environment.
