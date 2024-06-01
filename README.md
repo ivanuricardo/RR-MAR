@@ -64,3 +64,9 @@ julia -t 999 scripts/globaltucker.jl  # For macroeconomic indicators over Eurozo
 These are much quicker than the simulations and can be done in less than ten minutes.
 
 The Jupyter notebooks can be run interactively and can be opened in any Jupyter environment.
+
+## Algorithms
+
+All helper functions and algorithms are located in the package `Common Features`, which we also maintain.
+To access this code, you can go the [Common Features Github repository](https://github.com/ivanuricardo/CommonFeatures.jl).
+
