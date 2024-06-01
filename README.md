@@ -8,11 +8,12 @@ In short, this Github repository is a Julia project that holds all dependencies 
 To (locally) reproduce this project, do the following:
 
 0. Download this code base.
-1. Open a Julia console and do:
+1. Navigate to the project root directory.
+2. Open a Julia console and do:
    ```
    julia> using Pkg
    julia> Pkg.add("DrWatson") # install globally, for using `quickactivate`
-   julia> Pkg.activate("path/to/this/project")
+   julia> Pkg.activate(".")  # Activate the project in the current directory
    julia> Pkg.instantiate()
    ```
 
