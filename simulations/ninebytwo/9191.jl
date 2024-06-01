@@ -5,9 +5,9 @@ using TensorToolbox, Statistics, Random, LinearAlgebra, CommonFeatures, Latexify
 Random.seed!(20230408)
 
 sims = 1000
-dimvals = [9,2]
+dimvals = [9, 2]
 ranks = [9, 1, 9, 1]
-r̄ = [9,2,9,2]
+r̄ = [9, 2, 9, 2]
 
 
 maxiters = 500
@@ -88,14 +88,34 @@ highrank = hcat(smallaicstats.freqhigh, smallbicstats.freqhigh,
 
 results = vcat(avgrank, stdrank, lowerrank, correctrank, highrank)
 
-latexmatrix = latexify(round.(results', digits=3))
+latexmatrix = latexify(round.(results', digits=2))
 filepath = "final.txt"
 # Write the matrix to a file with a custom delimiter
 open(filepath, "w") do file
     write(file, latexmatrix)
 end
 
+statmat = results'
+
 println("Average iterations for small: ", mean(avgsmalliters))
 println("Average iterations for medium: ", mean(avgmediters))
+
+println("Average rank for small size (AIC): ", statmat[1, 1:4])
+println("Average rank for small size (BIC): ", statmat[2, 1:4])
+
+println("Average rank for medium size (AIC): ", statmat[3, 1:4])
+println("Average rank for medium size (BIC): ", statmat[4, 1:4])
+
+println("Std. Dev rank for small size (AIC): ", statmat[1, 5:8])
+println("Std. Dev rank for small size (BIC): ", statmat[2, 5:8])
+
+println("Std. Dev rank for medium size (AIC): ", statmat[3, 5:8])
+println("Std. Dev rank for medium size (BIC): ", statmat[4, 5:8])
+
+println("Freq. Correct for small size (AIC): ", statmat[1, 13:16])
+println("Freq. Correct for small size (BIC): ", statmat[2, 13:16])
+
+println("Freq. Correct for medium size (AIC): ", statmat[3, 13:16])
+println("Freq. Correct for medium size (BIC): ", statmat[4, 13:16])
 
 
