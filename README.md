@@ -68,6 +68,6 @@ The Jupyter notebooks can be run interactively and can be opened in any Jupyter 
 
 ## Algorithms
 
-All helper functions and algorithms are located in the package `Common Features`, which we also maintain.
-To access this code, you can go the [Common Features Github repository](https://github.com/ivanuricardo/CommonFeatures.jl).
+All helper functions and algorithms are located in the package `CommonFeatures`, which we also maintain.
+To access this code, you can go the [CommonFeatures Github repository](https://github.com/ivanuricardo/CommonFeatures.jl).
 

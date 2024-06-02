@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate "RR-MAR"
 using TensorToolbox, Statistics, Random, LinearAlgebra, CommonFeatures, Latexify, ProgressBars, DelimitedFiles
 
-Random.seed!(20230408)
+Random.seed!(20230409)
 
 sims = 1000
 dimvals = [4, 3]
@@ -30,7 +30,7 @@ medobs = 500 + burnin
 folder = "savedsims"
 
 A, G, U1, U2, U3, U4, U5 = generatetuckercoef(dimvals, ranks, p; gscale, maxeigen)
-# sort(abs.(eigen(makecompanion(tenmat(A, row=[1, 2]))).values), rev=true)
+sort(abs.(eigen(makecompanion(tenmat(A, row=[1, 2]))).values), rev=true)
 
 avgmediters = []
 avgsmalliters = []
