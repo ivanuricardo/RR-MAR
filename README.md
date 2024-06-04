@@ -66,6 +66,17 @@ These are much quicker than the simulations and can be done in less than ten min
 
 The Jupyter notebooks can be run interactively and can be opened in any Jupyter environment.
 
+## Plots
+
+Most plots in the paper are reproducible.
+In order to reproduce a plot, simply run
+
+```bash
+julia plots/globalplots.jl  # For global macroeconomic indicators factors.
+julia plots/projheatmaps.jl  # For heatmaps from projection matrices.
+```
+
+
 ## Algorithms
 
 All helper functions and algorithms are located in the package `CommonFeatures`, which we also maintain.
