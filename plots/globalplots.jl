@@ -1,3 +1,6 @@
+using DrWatson
+@quickactivate
+
 using CodecBzip2
 using TensorToolbox, CommonFeatures, RData, LinearAlgebra, Statistics, Makie, Dates
 using CairoMakie
