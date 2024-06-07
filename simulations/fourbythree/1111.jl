@@ -4,7 +4,7 @@ using TensorToolbox, Statistics, Random, LinearAlgebra, CommonFeatures, Latexify
 
 Random.seed!(20230408)
 
-sims = 2
+sims = 1000
 dimvals = [4, 3]
 ranks = [1, 1, 1, 1]
 r̄ = [4, 3, 4, 3]
