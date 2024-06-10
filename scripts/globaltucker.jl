@@ -5,9 +5,9 @@ using TensorToolbox, CommonFeatures, RData, LinearAlgebra, Statistics
 
 globaldata = load("data/globaldata.rda")
 unpermuted = globaldata["matdata"]
-mardata = permutedims(unpermuted, (3, 2, 1))
+mardata = permutedims(unpermuted, (2, 3, 1))
 
-r̄ = [5, 4, 5, 4]
+r̄ = [4, 5, 4, 5]
 maxiters = 500
 tucketa = 1e-03
 ϵ = 1e-03
