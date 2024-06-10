@@ -7,7 +7,7 @@ using CairoMakie
 
 globaldata = load("data/globaldata.rda")
 unpermuted = globaldata["matdata"]
-mardata = permutedims(unpermuted, (3, 2, 1))
+mardata = permutedims(unpermuted, (2, 3, 1))
 
 start_date = Date(1996, 1, 1)
 end_date = Date(2019, 12, 31)
@@ -37,46 +37,38 @@ axint1 = Axis(fig[1, 1], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), tit
 lines!(axint1, ticks, mardata[1, 1, :], color=:blue, label="IR")
 text!(axint1, counposition, abs(maximum(mardata[1, 1, :])) + 0.25, text=countries[1], align=(:right, :top), fontsize=fontsize)
 text!(axint1, indposition, -1, text=indicators[1], align=(:left, :bottom), fontsize=fontsize)
-hideydecorations!(axint1)
 
 for i in 2:5
     axint = Axis(fig[1, i], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-    lines!(axint, ticks, mardata[i, 1, :], color=:blue, label="IR")
-    text!(axint, counposition, abs(maximum(mardata[i, 1, :])) + 0.25, text=countries[i], align=(:right, :top), fontsize=fontsize)
-    hideydecorations!(axint)
+    lines!(axint, ticks, mardata[1, i, :], color=:blue, label="IR")
+    text!(axint, counposition, abs(maximum(mardata[1, i, :])) + 0.25, text=countries[i], align=(:right, :top), fontsize=fontsize)
 end
 
 axgdp1 = Axis(fig[2, 1], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-lines!(axgdp1, ticks, mardata[1, 2, :], color=:blue, label="GDP")
+lines!(axgdp1, ticks, mardata[2, 1, :], color=:blue, label="GDP")
 text!(axgdp1, indposition, -0.02, text="GDP", align=(:left, :bottom), fontsize=fontsize)
-hideydecorations!(axgdp1)
 
 for i in 2:5
     axgdp = Axis(fig[2, i], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-    lines!(axgdp, ticks, mardata[i, 2, :], color=:blue, label="GDP")
-    hideydecorations!(axgdp)
+    lines!(axgdp, ticks, mardata[2, i, :], color=:blue, label="GDP")
 end
 
 axprod1 = Axis(fig[3, 1], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-lines!(axprod1, ticks, mardata[1, 3, :], color=:blue, label="GDP")
+lines!(axprod1, ticks, mardata[3, 1, :], color=:blue, label="GDP")
 text!(axprod1, indposition, -0.07, text="PROD", align=(:left, :bottom), fontsize=fontsize)
-hideydecorations!(axprod1)
 
 for i in 2:5
     axprod = Axis(fig[3, i], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-    lines!(axprod, ticks, mardata[i, 3, :], color=:blue, label="GDP")
-    hideydecorations!(axprod)
+    lines!(axprod, ticks, mardata[3, i, :], color=:blue, label="GDP")
 end
 
 axcpi1 = Axis(fig[4, 1], xticks=(ticks[1:qstep:end], adjlabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-lines!(axcpi1, ticks, mardata[1, 4, :], color=:blue, label="CPI")
+lines!(axcpi1, ticks, mardata[4, 1, :], color=:blue, label="CPI")
 text!(axcpi1, 8.2e8, 0.007, text="CPI", align=(:left, :bottom), fontsize=fontsize)
-hideydecorations!(axcpi1)
 
 for i in 2:5
     axcpi = Axis(fig[4, i], xticks=(ticks[1:qstep:end], adjlabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-    lines!(axcpi, ticks, mardata[i, 4, :], color=:blue, label="CPI")
-    hideydecorations!(axcpi)
+    lines!(axcpi, ticks, mardata[4, i, :], color=:blue, label="CPI")
 end
 
 fig

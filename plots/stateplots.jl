@@ -33,24 +33,20 @@ axci1 = Axis(fig[1, 1], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), titl
 lines!(axci1, ticks, statedata[:, (2)], color=:blue, label="CI")
 text!(axci1, stateposition, abs(maximum(statedata[:, 2])) + 0.5, text=states[1], align=(:right, :top))
 text!(axci1, indposition, -1, text="CI", align=(:left, :bottom))
-hideydecorations!(axci1)
 
 for i in 2:9
     axci = Axis(fig[1, i], xticks=(ticks[1:qstep:end], nolabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
     lines!(axci, ticks, statedata[:, (2*i)], color=:blue, label="CI")
     text!(axci, stateposition, abs(maximum(statedata[:, 2*i])) + 0.5, text=states[i], align=(:right, :top))
-    hideydecorations!(axci)
 end
 
 axli1 = Axis(fig[2, 1], xticks=(ticks[1:qstep:end], adjlabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
 lines!(axli1, ticks, statedata[:, 3], color=:blue, label="LI")
 text!(axli1, indposition, -1.8, text="LI", align=(:left, :bottom))
-hideydecorations!(axli1)
 
 for i in 2:9
     axli = Axis(fig[2, i], xticks=(ticks[1:qstep:end], adjlabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
     lines!(axli, ticks, statedata[:, (2*i+1)], color=:blue, label="LI")
-    hideydecorations!(axli)
 end
 
 fig
