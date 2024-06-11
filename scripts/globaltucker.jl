@@ -3,9 +3,7 @@ using DrWatson
 using CodecBzip2
 using TensorToolbox, CommonFeatures, RData, LinearAlgebra, Statistics
 
-globaldata = load("data/globaldata.rda")
-unpermuted = globaldata["matdata"]
-mardata = permutedims(unpermuted, (2, 3, 1))
+matdata = load(datadir("globaldata.jld2"), "matdata");
 
 r̄ = [4, 5, 4, 5]
 maxiters = 500
@@ -13,7 +11,7 @@ tucketa = 1e-03
 ϵ = 1e-03
 pmax = 3
 
-icranks = fullinfocrit(mardata, pmax, r̄; maxiters, tucketa, ϵ)
+icranks = fullinfocrit(matdata, pmax, r̄; maxiters, tucketa, ϵ)
 aic = icranks.aic[1:4]
 aicp = icranks.aic[end]
 bic = icranks.bic[1:4]

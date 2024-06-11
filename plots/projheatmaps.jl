@@ -5,17 +5,15 @@ using CodecBzip2
 using TensorToolbox, CommonFeatures, RData, LinearAlgebra, Statistics, Makie, Dates
 using CairoMakie
 
-globaldata = load("data/globaldata.rda")
-unpermuted = globaldata["matdata"]
-mardata = permutedims(unpermuted, (2, 3, 1))
+matdata = load(datadir("globaldata.jld2"), "matdata");
 
 maxiter = 500
 tucketa = 1e-03
 ϵ = 1e-03
 
-tuckest = tuckerreg(mardata, [3, 1, 4, 3]; eta=tucketa, maxiter, p=1, ϵ)
+tuckest = tuckerreg(matdata, [3, 1, 4, 3]; eta=tucketa, maxiter, p=1, ϵ)
 
-cendata = mardata .- mean(mardata, dims=3)
+cendata = matdata .- mean(matdata, dims=3)
 origy, lagy = tlag(cendata, 1);
 predfacs = ttm(ttm(lagy, tuckest.U[3]', 1), tuckest.U[4]', 2)
 
