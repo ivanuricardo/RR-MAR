@@ -4,9 +4,9 @@ using DrWatson
 using CSV, DataFrames, JLD2
 
 # function for difference of a country's data with optional log transformation
-function diffcountry(country::String, dataset::DataFrame; log_transform::Bool=false)
-    country_data = filter(row -> row.Location == country, dataset)
-    values = log_transform ? log.(country_data.Value) : country_data.Value
+function diffcountry(country::String, df::DataFrame; logtransform::Bool=false)
+    country_data = filter(row -> row.Location == country, df)
+    values = logtransform ? log.(country_data.Value) : country_data.Value
     return diff(values)
 end
 
@@ -29,12 +29,12 @@ end
 
 # GDP with log difference
 for (i, country) in enumerate(countries)
-    matdata[2, i, :] = diffcountry(country, gdp, log_transform=true)[20:115]
+    matdata[2, i, :] = diffcountry(country, gdp, logtransform=true)[20:115]
 end
 
 # production with log difference
 for (i, country) in enumerate(countries)
-    matdata[3, i, :] = diffcountry(country, prod, log_transform=true)[20:115]
+    matdata[3, i, :] = diffcountry(country, prod, logtransform=true)[20:115]
 end
 
 # CPI with fourth difference log transformation

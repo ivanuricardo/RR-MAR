@@ -19,13 +19,13 @@ predfacs = ttm(ttm(lagy, tuckest.U[3]', 1), tuckest.U[4]', 2)
 
 ###############################################
 
-start_date = Date(1996, 4, 1)
-end_date = Date(2019, 12, 31)
+startdate = Date(1996, 4, 1)
+enddate = Date(2019, 12, 31)
 
-quarterly_dates = collect(start_date:Dates.Quarter(1):end_date)
-date_times = DateTime.(string.(quarterly_dates), "yyyy-mm-dd")
-ticks = Dates.datetime2unix.(date_times)
-labels = Dates.format.(date_times, "Y")
+quarterlydates = collect(startdate:Dates.Quarter(1):enddate)
+datetimes = DateTime.(string.(quarterlydates), "yyyy-mm-dd")
+ticks = Dates.datetime2unix.(datetimes)
+labels = Dates.format.(datetimes, "Y")
 
 ###############################################
 

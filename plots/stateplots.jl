@@ -6,13 +6,13 @@ using CairoMakie
 
 statedata = XLSX.readdata("data/reguib_northcentral.xlsx", "Sheet1!A2:S459")
 
-start_date = Date(1982, 1, 1)
-end_date = Date(2020, 2, 1)
+startdate = Date(1982, 1, 1)
+enddate = Date(2020, 2, 1)
 
-monthly_dates = collect(start_date:Dates.Month(1):end_date)
-date_times = DateTime.(string.(monthly_dates), "yyyy-mm-dd")
-ticks = Dates.datetime2unix.(date_times)
-labels = Dates.format.(date_times, "Y")
+monthlydates = collect(startdate:Dates.Month(1):enddate)
+datetimes = DateTime.(string.(monthlydates), "yyyy-mm-dd")
+ticks = Dates.datetime2unix.(datetimes)
+labels = Dates.format.(datetimes, "Y")
 adjlabels = map(x -> x[3:end], labels)  # Takes only last 2 characters of year
 adjlabels .= string.("'", adjlabels)
 nolabels = fill("", length(adjlabels))

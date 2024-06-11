@@ -7,13 +7,13 @@ using CairoMakie
 
 matdata = load(datadir("globaldata.jld2"), "matdata");
 
-start_date = Date(1996, 1, 1)
-end_date = Date(2019, 12, 31)
+startdate = Date(1996, 1, 1)
+enddate = Date(2019, 12, 31)
 
-quarterly_dates = collect(start_date:Dates.Quarter(1):end_date)
-date_times = DateTime.(string.(quarterly_dates), "yyyy-mm-dd")
-ticks = Dates.datetime2unix.(date_times)
-labels = Dates.format.(date_times, "Y")
+quarterlydates = collect(startdate:Dates.Quarter(1):enddate)
+datetimes = DateTime.(string.(quarterlydates), "yyyy-mm-dd")
+ticks = Dates.datetime2unix.(datetimes)
+labels = Dates.format.(datetimes, "Y")
 adjlabels = map(x -> x[3:end], labels)  # Takes only last 2 characters of year
 adjlabels .= string.("'", adjlabels)
 nolabels = fill("", length(adjlabels))
