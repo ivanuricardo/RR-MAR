@@ -1,6 +1,6 @@
-# Reduced Rank Matrix Autoregressive Models: A Medium $N$ Approach
+# Reduced-Rank Matrix Autoregressive Models: A Medium $N$ Approach
 
-This code base contains code for the paper "Reduced Rank Autoregressive Models: A Medium $N$ Approach" by Alain Hecq, Ivan Ricardo, and Ines Wilms.
+This code base contains code for the paper "Reduced-Rank Autoregressive Models: A Medium $N$ Approach" by Alain Hecq, Ivan Ricardo, and Ines Wilms.
 Here you will find replication code for the simulations and most of the tables and figures in the main paper.
 This is all possible through the use of the [Julia programming language](https://julialang.org/) and the [DrWatson](https://juliadynamics.github.io/DrWatson.jl/stable/) package.
 In short, this Github repository is a Julia project that holds all dependencies required to run the scripts in the paper.
