@@ -17,7 +17,7 @@ countries = ["USA", "CAN", "DEU", "FRA", "GBR"]
 
 interestrate = CSV.read(datadir("longir.csv"), DataFrame)
 gdp = CSV.read(datadir("gdpextended.csv"), DataFrame)
-prod = CSV.read(datadir("prodextended.csv"), DataFrame)
+production = CSV.read(datadir("prodextended.csv"), DataFrame)
 cpi = CSV.read(datadir("cpiextended.csv"), DataFrame)
 
 matdata = fill(NaN, 4, 5, 96)
@@ -34,7 +34,7 @@ end
 
 # production with log difference
 for (i, country) in enumerate(countries)
-    matdata[3, i, :] = diffcountry(country, prod, logtransform=true)[20:115]
+    matdata[3, i, :] = diffcountry(country, production, logtransform=true)[20:115]
 end
 
 # CPI with fourth difference log transformation

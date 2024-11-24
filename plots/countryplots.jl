@@ -110,7 +110,7 @@ lines!(axcpi4, xticks, matdata[4, 4, :], color=:blue, label="CPI")
 axcpi4.yticks = -0.02:0.01:0.04
 
 axcpi5 = Axis(fig[4, 5], xticks=(xticks[1:qstep:end], adjlabels[1:qstep:end]), titlesize=titlesize, xlabelsize=xlabsize, xticklabelsize=xticksize, ylabelsize=ylabsize, yticklabelsize=yticksize)
-lines!(axcpi5, xticks, matdata[4, 2, :], color=:blue, label="CPI")
+lines!(axcpi5, xticks, matdata[4, 5, :], color=:blue, label="CPI")
 axcpi5.yticks = -0.02:0.01:0.04
 
 fig
