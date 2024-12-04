@@ -17,6 +17,7 @@ gscale = 4
 maxeigen = 0.9
 snr = 0.7
 p = 1
+pmax = 3
 
 smallaic = fill(NaN, 4, sims)
 smallbic = fill(NaN, 4, sims)

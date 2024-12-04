@@ -17,11 +17,12 @@ gscale = 4
 maxeigen = 0.9
 snr = 0.7
 p = 1
+pmax = 3
 
-smallaic = fill(NaN, 4, sims)
-smallbic = fill(NaN, 4, sims)
-medaic = fill(NaN, 4, sims)
-medbic = fill(NaN, 4, sims)
+smallaic = fill(NaN, 5, sims)
+smallbic = fill(NaN, 5, sims)
+medaic = fill(NaN, 5, sims)
+medbic = fill(NaN, 5, sims)
 
 burnin = 50
 smallobs = 100 + burnin
@@ -30,25 +31,25 @@ medobs = 500 + burnin
 folder = "savedsims"
 
 A, G, U1, U2, U3, U4, U5 = generatetuckercoef(dimvals, ranks, p; gscale, maxeigen)
-sort(abs.(eigen(makecompanion(tenmat(A, row=[1, 2]))).values), rev=true)
+# sort(abs.(eigen(makecompanion(tenmat(A, row=[1, 2]))).values), rev=true)
 
-avgmediters = []
-avgsmalliters = []
+avgmediters = fill(NaN, sims)
+avgsmalliters = fill(NaN, sims)
 
 Threads.@threads for s in ProgressBar(1:sims)
     medmar = simulatetuckerdata(dimvals, ranks, medobs; A, p, snr)
     medmar = medmar.data[:, :, (burnin+1):end]
-    medicest = infocrit(medmar, p; r̄, maxiters, tucketa, ϵ)
-    medaic[:, s] .= medicest.aic[1:4]
-    medbic[:, s] .= medicest.bic[1:4]
-    push!(avgmediters, mean(filter(!isnan, medicest.ictable[7, :])))
+    medicest = fullinfocrit(medmar, pmax, r̄; maxiters, tucketa, ϵ)
+    medaic[:, s] .= medicest.aicval[1:5]
+    medbic[:, s] .= medicest.bicval[1:5]
+    avgmediters[s] = mean(filter(!isnan, medicest.regiters))
 
     smallmar = simulatetuckerdata(dimvals, ranks, smallobs; A, p, snr)
     smallmar = smallmar.data[:, :, (burnin+1):end]
-    smallicest = infocrit(smallmar, p; r̄, maxiters, tucketa, ϵ)
-    smallaic[:, s] .= smallicest.aic[1:4]
-    smallbic[:, s] .= smallicest.bic[1:4]
-    push!(avgsmalliters, mean(filter(!isnan, smallicest.ictable[7, :])))
+    smallicest = fullinfocrit(smallmar, pmax, r̄; maxiters, tucketa, ϵ)
+    smallaic[:, s] .= smallicest.aicval[1:5]
+    smallbic[:, s] .= smallicest.bicval[1:5]
+    avgsmalliters[s] = mean(filter(!isnan, smallicest.regiters))
 
     smallaicpath = joinpath(pwd(), folder, "smallaic$s.csv")
     smallbicpath = joinpath(pwd(), folder, "smallbic$s.csv")
@@ -65,17 +66,17 @@ Threads.@threads for s in ProgressBar(1:sims)
     GC.gc()
 end
 
-smallaicstats = simstats(smallaic, ranks, sims)
-smallbicstats = simstats(smallbic, ranks, sims)
+smallaicstats = simstats(smallaic[1:4, :], ranks, sims)
+smallbicstats = simstats(smallbic[1:4, :], ranks, sims)
 
-medaicstats = simstats(medaic, ranks, sims)
-medbicstats = simstats(medbic, ranks, sims)
+medaicstats = simstats(medaic[1:4, :], ranks, sims)
+medbicstats = simstats(medbic[1:4, :], ranks, sims)
 
-avgrank = hcat(smallaicstats.avgrank, smallbicstats.avgrank,
-    medaicstats.avgrank, medbicstats.avgrank)
+avgrank = hcat(smallaicstats.avgval, smallbicstats.avgval,
+    medaicstats.avgval, medbicstats.avgval)
 
-stdrank = hcat(smallaicstats.stdrank, smallbicstats.stdrank,
-    medaicstats.stdrank, medbicstats.stdrank)
+stdrank = hcat(smallaicstats.stdval, smallbicstats.stdval,
+    medaicstats.stdval, medbicstats.stdval)
 
 lowerrank = hcat(smallaicstats.freqlow, smallbicstats.freqlow,
     medaicstats.freqlow, medbicstats.freqlow)
@@ -96,6 +97,12 @@ open(filepath, "w") do file
 end
 
 statmat = results'
+
+smallaiclag = simstats(smallaic[5, :], p, sims)
+smallbiclag = simstats(smallbic[5, :], p, sims)
+
+medaiclag = simstats(medaic[5, :], p, sims)
+medbiclag = simstats(medbic[5, :], p, sims)
 
 println("Average iterations for small: ", mean(avgsmalliters))
 println("Average iterations for medium: ", mean(avgmediters))
@@ -118,4 +125,17 @@ println("Freq. Correct for small size (BIC): ", statmat[2, 13:16])
 println("Freq. Correct for medium size (AIC): ", statmat[3, 13:16])
 println("Freq. Correct for medium size (BIC): ", statmat[4, 13:16])
 
+################################################################################
+
+println("Average lag for small size (p, AIC): ", smallaiclag.avgval)
+println("Average lag for small size (p, BIC): ", smallbiclag.avgval)
+
+println("Freq. Correct for small size (p, AIC): ", smallaiclag.freqcorrect)
+println("Freq. Correct for small size (p, BIC): ", smallbiclag.freqcorrect)
+
+println("Average lag for medium size (p): ", medaiclag.avgval)
+println("Average lag for medium size (p): ", medbiclag.avgval)
+
+println("Freq. Correct for medium size (p): ", medaiclag.freqcorrect)
+println("Freq. Correct for medium size (p): ", medbiclag.freqcorrect)
 
